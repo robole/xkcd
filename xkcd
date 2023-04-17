@@ -6,7 +6,7 @@
 #
 # Requires: - Kitty terminal (https://sw.kovidgoyal.net/kitty/) with icat kitten
 #           - ImageMagick (https://www.imagemagick.org/),
-#           - Common unix (linux) utilities: curl, grep, cut.
+#           - Common unix (linux) utilities: curl, grep, cut, perl.
 #
 # Usage:
 # Run 'xkcd --help' 
@@ -15,23 +15,30 @@
 # Date: 24/02/22
 
 URL=https://xkcd.com/
+img=""
+title=""
 
-function fetch () {
-	echo "$(curl -s -L $URL | \
-		grep 'href= "https://imgs.xkcd.com/comics.*' | \
-		cut -d'>' -f2 | \
-		cut -d'<' -f1)"
+function parse() {
+	temp_file=$(mktemp)
+	curl -s -L $URL > "$temp_file"
+	img="https:$(grep 'img src.* title=".*' "$temp_file" | cut -d '"' -f 2)"
+	
+	# we need to decode HTML entities e.g &quot; to display text correctly
+	title="$(grep 'img src.* title=".*' "$temp_file" | cut -d '"' -f 4 | perl -MHTML::Entities -pe 'decode_entities($_);')"
+
+	rm "${temp_file}"
 }
 
 function show_image(){
-	img=$(fetch)
+	parse
 	echo ""
 	kitty +kitten icat "$img"
+	echo "$title"
 }
 
 function help() {
 		fmt_help="  %-20s\t%-54s\n"
-		
+
     echo "Description: Display XKCD comic in the terminal."
     echo ""
     echo "Usage: xkcd [-l|--latest] [-r|--random] [-h|--help]"

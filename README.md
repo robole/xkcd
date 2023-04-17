@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img align="center" src="img/logo.png" width="300px" height="300px" alt="xkcd logo">
+    <img align="center" src="img/logo.png" width="300" height="300" alt="xkcd logo">
   <br>
 	xkcd
 </h1>
@@ -8,14 +8,14 @@
 
 [xkcd](https://xkcd.com/) is probably the most popular webcomic with devs. It only seems right that you can read it from the comfort of your terminal via a `xkcd` command.
 
- <p align="center"><img src="img/xkcd-command.png" width="507px" height="540px" alt="xkcd command on terminal"></p>
+ <p align="center"><img src="img/xkcd-with-title.png" width="610" height="496" alt="xkcd command on terminal"></p>
 
 ## Requirements
 
 Here is a summary of the dependencies:
 - [Kitty](https://sw.kovidgoyal.net/kitty/) terminal. Kitty shows images via the `icat` kitten which is included in the default installation.
 - [ImageMagick](https://www.imagemagick.org/) is used by Kitty under hood as far as I know.
-- The utilties you find in most unix-like systems: [`curl`](https://curl.se/docs/manpage.html), [`grep`](https://en.wikipedia.org/wiki/Grep), and [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)).
+- The utilties you find in most unix-like systems: [`curl`](https://curl.se/docs/manpage.html), [`grep`](https://en.wikipedia.org/wiki/Grep), [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), and `perl`.
 
 If you do not want to use Kitty, I believe [iTerm2](https://iterm2.com/index.html) has similar functionality with its [`imgcat` script](https://iterm2.com/documentation-images.html). You will need to adapt the script to use this.
 
@@ -38,7 +38,7 @@ For example, to show a random comic, run the command `xkcd --random`.
 
 ## Want to learn about the code?
 
-I wrote an article where I walked through a minimal version of the code - [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html).
+I wrote an article where I walked through a minimal version of the code - [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html). I also mention alternative approaches.
 
 ## Attribution
 
