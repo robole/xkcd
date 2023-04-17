@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# XKCD
+#
+# Display a XCKD comic on kitty terminalxkcd-command.png
+#
+# Requires: - Kitty terminal (https://sw.kovidgoyal.net/kitty/) with icat kitten
+#           - ImageMagick (https://www.imagemagick.org/),
+#           - Common unix (linux) utilities: curl, grep, cut.
+#
+# Usage:
+# Run 'xkcd --help' 
+#
+# Author: Rob O'Leary
+# Date: 24/02/22
+
+URL=https://xkcd.com/
+
+function fetch () {
+	echo "$(curl -s -L $URL | \
+		grep 'href= "https://imgs.xkcd.com/comics.*' | \
+		cut -d'>' -f2 | \
+		cut -d'<' -f1)"
+}
+
+function show_image(){
+	img=$(fetch)
+	echo ""
+	kitty +kitten icat "$img"
+}
+
+function help() {
+		fmt_help="  %-20s\t%-54s\n"
+		
+    echo "Description: Display XKCD comic in the terminal."
+    echo ""
+    echo "Usage: xkcd [-l|--latest] [-r|--random] [-h|--help]"
+    printf "${fmt_help}" \
+        "-h, --help" "Print the help page." \
+				"-l, --latest" "Show the latest comic." \
+        "-r, --random" "Show a random comic."	
+}
+
+case "$#" in
+    0)
+        help
+        ;;
+    1)
+        case "$1" in
+            -h | --help)
+                help
+                ;;
+            -l | --latest)
+                show_image
+                ;;
+            -r | --random )
+                URL=https://c.xkcd.com/random/comic
+								show_image
+                ;;
+            *)
+                echo "Input error."
+                exit 1
+                ;;
+        esac
+        ;;
+esac
