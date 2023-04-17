@@ -10,6 +10,10 @@
 
  <p align="center"><img src="img/xkcd-with-title.png" width="610" height="496" alt="xkcd command on terminal"></p>
 
+ This is **the version that scrapes the webpage (*main* branch)**.
+
+ To see the alternative version that uses the web api, go to the *json* branch.
+
 ## Requirements
 
 Here is a summary of the dependencies:
@@ -17,7 +21,7 @@ Here is a summary of the dependencies:
 - [ImageMagick](https://www.imagemagick.org/) is used by Kitty under hood as far as I know.
 - The utilties you find in most unix-like systems: [`curl`](https://curl.se/docs/manpage.html), [`grep`](https://en.wikipedia.org/wiki/Grep), [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), and `perl`.
 
-If you do not want to use Kitty, I believe [iTerm2](https://iterm2.com/index.html) has similar functionality with its [`imgcat` script](https://iterm2.com/documentation-images.html). You will need to adapt the script to use this.
+If you do not want to use Kitty, I believe [iTerm2](https://iterm2.com/index.html) has similar functionality with its [`imgcat` script](https://iterm2.com/documentation-images.html). It is a minor change to adapt the script to use that instead.
 
 ## Install
 
@@ -38,7 +42,7 @@ For example, to show a random comic, run the command `xkcd --random`.
 
 ## Want to learn about the code?
 
-I wrote an article where I walked through a minimal version of the code - [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html). I also mention alternative approaches.
+I wrote an article where I walked through a minimal version of the code - [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html).
 
 ## Attribution
 
