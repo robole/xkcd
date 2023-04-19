@@ -10,16 +10,13 @@
 
  <p align="center"><img src="img/xkcd-with-title.png" width="610" height="496" alt="xkcd command on terminal"></p>
 
- This is **the version that scrapes the webpage (*main* branch)**.
-
- To see the alternative version that uses the web api, go to the *json* branch.
-
 ## Requirements
 
 Here is a summary of the dependencies:
 - [Kitty](https://sw.kovidgoyal.net/kitty/) terminal. Kitty shows images via the `icat` kitten which is included in the default installation.
 - [ImageMagick](https://www.imagemagick.org/) is used by Kitty under hood as far as I know.
-- The utilties you find in most unix-like systems: [`curl`](https://curl.se/docs/manpage.html), [`grep`](https://en.wikipedia.org/wiki/Grep), [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), and `perl`.
+- The common GNU Core utility - [`sed`](https://en.wikipedia.org/wiki/Sed)
+- The JSON processing program - [`jq`](https://stedolan.github.io/jq/)
 
 If you do not want to use Kitty, I believe [iTerm2](https://iterm2.com/index.html) has similar functionality with its [`imgcat` script](https://iterm2.com/documentation-images.html). It is a minor change to adapt the script to use that instead.
 
@@ -40,19 +37,19 @@ Usage: xkcd [-l|--latest] [-r|--random] [-h|--help]
 
 For example, to show a random comic, run the command `xkcd --random`.
 
-## Want to learn about the code?
+## Versions
 
-I wrote an article where I walked through a minimal version of the code - [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html).
+I wrote 2 versions of this with the same interface:
+1. **This is the version that uses the web api (*json* branch)**.
+1. The alternative version scrapes the webpages, go to the *main* branch to check it out.
+
+I discuss the code in this article -- [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html).
 
 ## Appreciate
 
 You can show your appreciation by:
-1. [Buying me a coffee or sponsoring me](https://ko-fi.com/roboleary)
-1. Starring the repo 🌟.
-
-This will **help other people find the extension**.
-
-It will **offer me encouragement** to continue, and can provide **a path to dedicating more time to open-source** in the future.
+1. [Buying me a coffee or sponsoring me](https://ko-fi.com/roboleary). This will **offer me encouragement** to continue, and can provide **a path to dedicating more time to open-source** in the future.
+1. Starring the repo 🌟. This will **help other people find this**.
 
 Thank you! 🙏
 
