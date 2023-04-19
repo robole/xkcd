@@ -33,7 +33,13 @@ function show(){
 	parse
 	echo ""
 	kitty +kitten icat --align left "$img"
+	echo ""
 	echo "$title"
+}
+
+function show_random(){
+	URL=https://c.xkcd.com/random/comic
+	show
 }
 
 function help() {
@@ -61,8 +67,7 @@ case "$#" in
                 show
                 ;;
             -r | --random )
-                URL=https://c.xkcd.com/random/comic
-								show
+								show_random
                 ;;
             *)
                 echo "Input error."

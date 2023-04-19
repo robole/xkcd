@@ -44,6 +44,18 @@ For example, to show a random comic, run the command `xkcd --random`.
 
 I wrote an article where I walked through a minimal version of the code - [Read XKCD in the terminal with some bash magic](https://www.roboleary.net/2022/02/24/xkcd-in-the-terminal-with-some-bash-magic.html).
 
+## Appreciate
+
+You can show your appreciation by:
+1. [Buying me a coffee or sponsoring me](https://ko-fi.com/roboleary)
+1. Starring the repo 🌟.
+
+This will **help other people find the extension**.
+
+It will **offer me encouragement** to continue, and can provide **a path to dedicating more time to open-source** in the future.
+
+Thank you! 🙏
+
 ## Attribution
 
 XKCD is licensed under a [Creative Commons Attribution-NonCommercial 2.5 License](https://creativecommons.org/licenses/by-nc/2.5/).
