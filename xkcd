@@ -97,7 +97,7 @@ while getopts ":hlrs:" opt; do
       echo "Error: Invalid option -$OPTARG"
       exit 1
       ;;
-    *) # Invalid parameter without a leading dash
+    *)
       echo "Error: Invalid option -$OPTARG"
       exit 1
       ;;
