@@ -17,6 +17,9 @@
 URL=https://xkcd.com/
 img=""
 title=""
+scale=100
+latest=false
+random=false
 
 function parse() {
 	temp_file=$(mktemp)
@@ -26,13 +29,28 @@ function parse() {
 	# we need to decode HTML entities e.g &quot; to display text correctly
 	title="$(grep 'img src.* title=".*' "$temp_file" | cut -d '"' -f 4 | perl -MHTML::Entities -pe 'decode_entities($_);')"
 
-	rm "${temp_file}"
+	rm "$temp_file"
 }
 
 function show(){
 	parse
 	echo ""
-	kitty +kitten icat --align left "$img"
+
+	if [ $scale -eq 100 ]; then
+		kitty +kitten icat --align left "$img"
+	else
+		temp_file=$(mktemp)
+		convert "$img" -resize $scale% $temp_file
+		kitty +kitten icat --align left $temp_file
+
+		# Wait until the file is no longer being accessed by kitty
+		while [[ -f "$temp_file" && -n "$(lsof -t "$temp_file")" ]]; do
+		  sleep 0.1
+		done
+
+		rm "$temp_file"
+	fi
+
 	echo ""
 	echo "$title"
 }
@@ -43,36 +61,69 @@ function show_random(){
 }
 
 function help() {
-		fmt_help="  %-20s\t%-54s\n"
+    fmt_help="  %-22s\t%-54s\n"
 
     echo "Description: Display XKCD comic in the terminal."
     echo ""
-    echo "Usage: xkcd [-l|--latest] [-r|--random] [-h|--help]"
+    echo "Usage: xkcd [-l|--latest] [-r|--random] [-h|--help] [-s scale]"
     printf "${fmt_help}" \
         "-h, --help" "Print the help page." \
-				"-l, --latest" "Show the latest comic." \
-        "-r, --random" "Show a random comic."	
+        "-l, --latest" "Show the latest comic." \
+        "-r, --random" "Show a random comic." \
+	"-s, --scale percentage" "Scale the image by percentage (requires Imagemagick)."
 }
 
-case "$#" in
-    0)
-        help
-        ;;
-    1)
-        case "$1" in
-            -h | --help)
-                help
-                ;;
-            -l | --latest)
-                show
-                ;;
-            -r | --random )
-								show_random
-                ;;
-            *)
-                echo "Input error."
-                exit 1
-                ;;
-        esac
-        ;;
-esac
+
+while getopts ":hlrs:" opt; do
+  case ${opt} in
+    h)
+      help
+      exit 0
+      ;;
+    l)
+      latest=true
+      ;;
+    r)
+      random=true
+      ;;
+    s)
+      scale=${OPTARG}
+      ;;
+    :)
+      echo "Error: Option -$OPTARG requires an argument."
+      exit 1
+      ;;
+    \?)
+      echo "Error: Invalid option -$OPTARG"
+      exit 1
+      ;;
+    *) # Invalid parameter without a leading dash
+      echo "Error: Invalid option -$OPTARG"
+      exit 1
+      ;;
+  esac
+done
+
+shift "$((OPTIND-1))"
+for arg do
+  echo "Error: Invalid argument '$arg'."
+  echo ""
+  help
+  exit 1
+done
+
+if [ $OPTIND -eq 1 ]; then
+    help
+    exit 0
+fi
+
+if [ $latest = true ] && [ $random = true ]; then
+  echo "Error: Both -l and -r options were supplied. Only one option is allowed."
+  exit 0
+elif [ $latest = true ]; then
+  show
+  exit 0
+else
+  show_random
+  exit 0
+fi
