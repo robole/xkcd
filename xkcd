@@ -8,8 +8,7 @@
 #           - ImageMagick (https://www.imagemagick.org/),
 #           - Common utilities found in unix-like systems: curl, grep, cut, perl.
 #
-# Usage:However, both methods produce a similar size script.
-# Run 'xkcd --help' to find out
+# Usage: Run 'xkcd --help' to find out
 #
 # Author: Rob O'Leary
 # Date: 24/02/22
@@ -48,7 +47,7 @@ function help() {
     echo "Description: Display XKCD comic in the terminal."
     echo ""
     echo "Usage: xkcd [-l|--latest] [-r|--random] [-h|--help]"
-    printf "${fmt_help}" \
+    printf "$fmt_help" \
         "-h, --help" "Print the help page." \
 				"-l, --latest" "Show the latest comic." \
         "-r, --random" "Show a random comic."	
