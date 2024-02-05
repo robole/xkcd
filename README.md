@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img align="center" src="img/logo.png" width="300" height="300" alt="xkcd logo">
+    <img align="center" src="img/logo.png" width="150" height="150" alt="xkcd logo">
   <br>
 	xkcd
 </h1>
