@@ -5,8 +5,7 @@
 # Display a XCKD comic on kitty terminalxkcd-command.png
 #
 # Requires: - Kitty terminal (https://sw.kovidgoyal.net/kitty/) with icat kitten
-#           - ImageMagick (https://www.imagemagick.org/),
-#           - Common utilities found in unix-like systems: curl, grep, cut, perl.
+#           - Core utilities found in unix-like systems: curl, grep, cut, perl.
 #
 # Usage: Run 'xkcd --help' to find out
 #
@@ -20,17 +19,30 @@ title=""
 function parse() {
 	temp_file=$(mktemp)
 	curl -s -L $URL > "$temp_file"
-	img="https:$(grep 'img src.* title=".*' "$temp_file" | cut -d '"' -f 2)"
-	
-	# we need to decode HTML entities e.g &quot; to display text correctly
-	title="$(grep 'img src.* title=".*' "$temp_file" | cut -d '"' -f 4 | perl -MHTML::Entities -pe 'decode_entities($_);')"
+  
+	# get the line containing an img element with a src and a title
+  line=$(grep 'img src.* title=".*' "$temp_file")
+
+  # get the value of the src attribute. In the regex, the square brackets bit - [^/]  - will match any character apart from a double quote.
+  re="src=\"([^\"]+)"
+  if [[ "$line" =~ $re  ]];
+  then
+   img="https:${BASH_REMATCH[1]}"
+  fi
+
+  # get the value of the title attribute
+  re="title=\"([^\"]+)"
+  if [[ "$line" =~ $re  ]];
+  then
+    # we need to decode HTML entities e.g &quot; to display text correctly
+   title="$(echo ${BASH_REMATCH[1]} | perl -MHTML::Entities -pe 'decode_entities($_);')"
+  fi
 
 	rm "${temp_file}"
 }
 
 function show(){
 	parse
-	echo ""
 	kitty +kitten icat --align left "$img"
 	echo ""
 	echo "$title"

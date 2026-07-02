@@ -14,10 +14,9 @@
 
 Here is a summary of the dependencies:
 - [Kitty](https://sw.kovidgoyal.net/kitty/) terminal. Kitty shows images via the `icat` kitten which is included in the default installation.
-- [ImageMagick](https://www.imagemagick.org/) is used by Kitty under hood as far as I know.
-- The utilties you find in most unix-like systems: [`curl`](https://curl.se/docs/manpage.html), [`grep`](https://en.wikipedia.org/wiki/Grep), [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), and `perl`.
+- The core utilties you find in most unix-like systems (linux, Mac, WSL): [`curl`](https://curl.se/docs/manpage.html), [`grep`](https://en.wikipedia.org/wiki/Grep), [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), and `perl`.
 
-If you do not want to use Kitty, I believe [iTerm2](https://iterm2.com/index.html) has similar functionality with its [`imgcat` script](https://iterm2.com/documentation-images.html). It is a minor change to adapt the script to use that instead.
+The [iTerm2](https://iterm2.com/index.html) terminal has similar functionality with its [`imgcat` script](https://iterm2.com/documentation-images.html). You can make a minor change to the script to use that instead.
 
 ## Install
 
@@ -27,14 +26,7 @@ It is preferable to move it to an executable location and be able to run it usin
 
 ## Usage
 
-```
-Usage: xkcd [-l|--latest] [-r|--random] [-h|--help]
-  -h, --help          	Print the help page.
-  -l, --latest        	Show the latest comic.                                   
-  -r, --random        	Show a random comic.                                  
-```
-
-For example, to show a random comic, run the command `xkcd --random`.
+You can run `xkcd` to see how the command options. You can get the latest comic with `xkcd --latest`.
 
 ## Versions
 
